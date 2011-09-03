@@ -8,7 +8,7 @@ rst2hml.py README.rst | ./hubify.py > README.html; open README.html
 """
 
 import sys
-import getopt
+import os
 import re
 from xml.etree.cElementTree import ElementTree, fromstring, tostring
 
@@ -25,7 +25,9 @@ def process(source):
 
     # github css
     style = root.find(".//%sstyle" % uri)
-    style.text = open('github.css').read().decode('utf-8')
+    css = os.path.normpath(os.path.join(os.path.dirname(sys.argv[0]),'github.css'))
+    with open(css) as f:
+        style.text = f.read().decode('utf-8')
 
     # add wikstyle to body and set width and padding for readabilty
     body = root.find("%sbody" % uri)

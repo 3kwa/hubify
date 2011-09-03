@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rst2html.py $1 | ~/Code/hubify/hubify.py
